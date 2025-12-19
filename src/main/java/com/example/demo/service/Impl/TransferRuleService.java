@@ -7,11 +7,13 @@ import com.example.demo.repository.UniversityRepository;
 import com.example.demo.service.TransferRuleService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TransferRuleServiceImpl implements TransferRuleService {
 
-    private final TransferRuleRepository repo;   // REQUIRED
-    private final UniversityRepository univRepo; // REQUIRED
+    private final TransferRuleRepository repo;
+    private final UniversityRepository univRepo;
 
     public TransferRuleServiceImpl(TransferRuleRepository repo,
                                    UniversityRepository univRepo) {
@@ -21,46 +23,20 @@ public class TransferRuleServiceImpl implements TransferRuleService {
 
     @Override
     public TransferRule createRule(TransferRule rule) {
-
-        University source = univRepo.findById(
-                rule.getSourceUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("not found"));
-
-        University target = univRepo.findById(
-                rule.getTargetUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("not found"));
+        University source = univRepo.findById(rule.getSourceUniversity().getId())
+                .orElseThrow(() -> new RuntimeException("University not found")); // "not found"
+        University target = univRepo.findById(rule.getTargetUniversity().getId())
+                .orElseThrow(() -> new RuntimeException("University not found")); // "not found"
 
         rule.setSourceUniversity(source);
         rule.setTargetUniversity(target);
-        rule.setActive(true);
+        if (rule.getActive() == null) rule.setActive(true);
 
         return repo.save(rule);
     }
 
     @Override
-    public TransferRule updateRule(Long id, TransferRule rule) {
-        TransferRule db = getRuleById(id);
-        db.setMinimumOverlapPercentage(rule.getMinimumOverlapPercentage());
-        db.setCreditHourTolerance(rule.getCreditHourTolerance());
-        return repo.save(db);
-    }
-
-    @Override
-    public TransferRule getRuleById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    @Override
-    public TransferRule getRulesForUniversities(Long sourceId, Long targetId) {
-        return repo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(
-                sourceId, targetId);
-    }
-
-    @Override
-    public void deactivateRule(Long id) {
-        TransferRule r = getRuleById(id);
-        r.setActive(false);
-        repo.save(r);
+    public List<TransferRule> getRulesForUniversities(Long sourceId, Long targetId) {
+        return repo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(sourceId, targetId);
     }
 }

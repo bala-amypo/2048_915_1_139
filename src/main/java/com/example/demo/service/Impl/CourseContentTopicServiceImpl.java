@@ -12,42 +12,32 @@ import java.util.List;
 @Service
 public class CourseContentTopicServiceImpl implements CourseContentTopicService {
 
-    private final CourseContentTopicRepository repo; // REQUIRED
-    private final CourseRepository courseRepo;       // REQUIRED
+    private final CourseContentTopicRepository repo;
+    private final CourseRepository courseRepo;
 
-    public CourseContentTopicServiceImpl(
-            CourseContentTopicRepository repo,
-            CourseRepository courseRepo) {
+    public CourseContentTopicServiceImpl(CourseContentTopicRepository repo,
+                                         CourseRepository courseRepo) {
         this.repo = repo;
         this.courseRepo = courseRepo;
     }
 
     @Override
     public CourseContentTopic createTopic(CourseContentTopic topic) {
+        Course course = courseRepo.findById(topic.getCourse().getId())
+                .orElseThrow(() -> new RuntimeException("Course not found")); // "not found"
 
-        Course c = courseRepo.findById(topic.getCourse().getId())
-                .orElseThrow(() -> new RuntimeException("not found"));
+        if (topic.getWeight() < 0 || topic.getWeight() > 100) {
+            throw new RuntimeException("Topic weight must be 0-100"); // "0-100"
+        }
 
-        topic.setCourse(c);
+        topic.setCourse(course);
         return repo.save(topic);
     }
 
     @Override
-    public CourseContentTopic updateTopic(Long id, CourseContentTopic topic) {
-        CourseContentTopic db = getTopicById(id);
-        db.setTopicName(topic.getTopicName());
-        db.setWeightPercentage(topic.getWeightPercentage());
-        return repo.save(db);
-    }
-
-    @Override
-    public CourseContentTopic getTopicById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    @Override
-    public List<CourseContentTopic> getTopicsForCourse(Long courseId) {
+    public List<CourseContentTopic> getTopicsByCourse(Long courseId) {
+        courseRepo.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found")); // "not found"
         return repo.findByCourseId(courseId);
     }
 }

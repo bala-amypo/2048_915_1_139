@@ -21,19 +21,8 @@ public class CourseContentTopicController {
         return service.createTopic(topic);
     }
 
-    @GetMapping("/{id}")
-    public CourseContentTopic get(@PathVariable Long id) {
-        return service.getTopicById(id);
-    }
-
     @GetMapping("/course/{courseId}")
     public List<CourseContentTopic> getByCourse(@PathVariable Long courseId) {
-        return service.getTopicsForCourse(courseId);
-    }
-
-    @PutMapping("/{id}")
-    public CourseContentTopic update(@PathVariable Long id,
-                                     @RequestBody CourseContentTopic topic) {
-        return service.updateTopic(id, topic);
+        return service.getTopicsByCourse(courseId);
     }
 }
