@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 
 @Entity
 public class University {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+    private String country;
+    private String accreditationLevel;
+    private boolean active;
 
     public University() {}
 
@@ -19,4 +21,13 @@ public class University {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
+
+    public String getAccreditationLevel() { return accreditationLevel; }
+    public void setAccreditationLevel(String accreditationLevel) { this.accreditationLevel = accreditationLevel; }
+
+    public boolean getActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }

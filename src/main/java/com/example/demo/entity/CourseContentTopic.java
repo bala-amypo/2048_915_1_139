@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 
 @Entity
 public class CourseContentTopic {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+    private String description;
 
-    private Long courseId; // to link with course
-
-    private Double weight; // Added to fix getWeight() errors
+    private Long courseId; // FK to Course
 
     public CourseContentTopic() {}
 
@@ -24,9 +22,9 @@ public class CourseContentTopic {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
     public Long getCourseId() { return courseId; }
     public void setCourseId(Long courseId) { this.courseId = courseId; }
-
-    public Double getWeight() { return weight; }
-    public void setWeight(Double weight) { this.weight = weight; }
 }
