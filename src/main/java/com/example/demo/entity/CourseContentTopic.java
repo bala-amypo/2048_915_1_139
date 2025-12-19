@@ -9,43 +9,24 @@ public class CourseContentTopic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Course course;
+    private String name;
 
-    private String topicName;
-    private Double weightPercentage;
+    private Long courseId; // to link with course
+
+    private Double weight; // Added to fix getWeight() errors
 
     public CourseContentTopic() {}
 
-    public Long getId() {
-        return id;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public Course getCourse() {
-        return course;
-    }
+    public Long getCourseId() { return courseId; }
+    public void setCourseId(Long courseId) { this.courseId = courseId; }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public String getTopicName() {
-        return topicName;
-    }
-
-    public void setTopicName(String topicName) {
-        this.topicName = topicName;
-    }
-
-    public Double getWeightPercentage() {
-        return weightPercentage;
-    }
-
-    public void setWeightPercentage(Double weightPercentage) {
-        this.weightPercentage = weightPercentage;
-    }
+    public Double getWeight() { return weight; }
+    public void setWeight(Double weight) { this.weight = weight; }
 }

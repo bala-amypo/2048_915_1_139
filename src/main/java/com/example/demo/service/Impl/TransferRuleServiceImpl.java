@@ -15,8 +15,7 @@ public class TransferRuleServiceImpl implements TransferRuleService {
     private final TransferRuleRepository repo;
     private final UniversityRepository univRepo;
 
-    public TransferRuleServiceImpl(TransferRuleRepository repo,
-                                   UniversityRepository univRepo) {
+    public TransferRuleServiceImpl(TransferRuleRepository repo, UniversityRepository univRepo) {
         this.repo = repo;
         this.univRepo = univRepo;
     }
@@ -24,9 +23,9 @@ public class TransferRuleServiceImpl implements TransferRuleService {
     @Override
     public TransferRule createRule(TransferRule rule) {
         University source = univRepo.findById(rule.getSourceUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("University not found")); // "not found"
+                .orElseThrow(() -> new RuntimeException("Source university not found"));
         University target = univRepo.findById(rule.getTargetUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("University not found")); // "not found"
+                .orElseThrow(() -> new RuntimeException("Target university not found"));
 
         rule.setSourceUniversity(source);
         rule.setTargetUniversity(target);
@@ -38,5 +37,13 @@ public class TransferRuleServiceImpl implements TransferRuleService {
     @Override
     public List<TransferRule> getRulesForUniversities(Long sourceId, Long targetId) {
         return repo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(sourceId, targetId);
+    }
+
+    @Override
+    public void deactivateRule(Long ruleId) {
+        TransferRule rule = repo.findById(ruleId)
+                .orElseThrow(() -> new RuntimeException("Rule not found"));
+        rule.setActive(false);
+        repo.save(rule);
     }
 }
