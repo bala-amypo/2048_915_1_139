@@ -15,57 +15,29 @@ public class TransferRule {
     @ManyToOne
     private University targetUniversity;
 
-    private Double minimumOverlapPercentage;
-    private Integer creditHourTolerance;
-    private Boolean active = true;
+    private Boolean active;
+
+    private Integer minTopicOverlap;      // Added for TransferEvaluation
+    private Double allowedCreditDiff;     // Added for TransferEvaluation
 
     public TransferRule() {}
 
-    public Long getId() {
-        return id;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public University getSourceUniversity() { return sourceUniversity; }
+    public void setSourceUniversity(University sourceUniversity) { this.sourceUniversity = sourceUniversity; }
 
-    public University getSourceUniversity() {
-        return sourceUniversity;
-    }
+    public University getTargetUniversity() { return targetUniversity; }
+    public void setTargetUniversity(University targetUniversity) { this.targetUniversity = targetUniversity; }
 
-    public void setSourceUniversity(University sourceUniversity) {
-        this.sourceUniversity = sourceUniversity;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
-    public University getTargetUniversity() {
-        return targetUniversity;
-    }
+    public Integer getMinTopicOverlap() { return minTopicOverlap; }
+    public void setMinTopicOverlap(Integer minTopicOverlap) { this.minTopicOverlap = minTopicOverlap; }
 
-    public void setTargetUniversity(University targetUniversity) {
-        this.targetUniversity = targetUniversity;
-    }
-
-    public Double getMinimumOverlapPercentage() {
-        return minimumOverlapPercentage;
-    }
-
-    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
-        this.minimumOverlapPercentage = minimumOverlapPercentage;
-    }
-
-    public Integer getCreditHourTolerance() {
-        return creditHourTolerance;
-    }
-
-    public void setCreditHourTolerance(Integer creditHourTolerance) {
-        this.creditHourTolerance = creditHourTolerance;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+    public Double getAllowedCreditDiff() { return allowedCreditDiff; }
+    public void setAllowedCreditDiff(Double allowedCreditDiff) { this.allowedCreditDiff = allowedCreditDiff; }
 }
