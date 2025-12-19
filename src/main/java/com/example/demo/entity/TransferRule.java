@@ -19,5 +19,53 @@ public class TransferRule {
     private Integer creditHourTolerance;
     private Boolean active = true;
 
-    
+    public TransferRule() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public University getSourceUniversity() {
+        return sourceUniversity;
+    }
+
+    public void setSourceUniversity(University sourceUniversity) {
+        this.sourceUniversity = sourceUniversity;
+    }
+
+    public University getTargetUniversity() {
+        return targetUniversity;
+    }
+
+    public void setTargetUniversity(University targetUniversity) {
+        this.targetUniversity = targetUniversity;
+    }
+
+    public Double getMinimumOverlapPercentage() {
+        return minimumOverlapPercentage;
+    }
+
+    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
+        this.minimumOverlapPercentage = minimumOverlapPercentage;
+    }
+
+    public Integer getCreditHourTolerance() {
+        return creditHourTolerance;
+    }
+
+    public void setCreditHourTolerance(Integer creditHourTolerance) {
+        this.creditHourTolerance = creditHourTolerance;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 }

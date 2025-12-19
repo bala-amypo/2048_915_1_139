@@ -22,5 +22,69 @@ public class TransferEvaluationResult {
     private LocalDateTime evaluatedAt = LocalDateTime.now();
     private String notes;
 
-    
+    public TransferEvaluationResult() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Course getSourceCourse() {
+        return sourceCourse;
+    }
+
+    public void setSourceCourse(Course sourceCourse) {
+        this.sourceCourse = sourceCourse;
+    }
+
+    public Course getTargetCourse() {
+        return targetCourse;
+    }
+
+    public void setTargetCourse(Course targetCourse) {
+        this.targetCourse = targetCourse;
+    }
+
+    public Double getOverlapPercentage() {
+        return overlapPercentage;
+    }
+
+    public void setOverlapPercentage(Double overlapPercentage) {
+        this.overlapPercentage = overlapPercentage;
+    }
+
+    public Integer getCreditHourDifference() {
+        return creditHourDifference;
+    }
+
+    public void setCreditHourDifference(Integer creditHourDifference) {
+        this.creditHourDifference = creditHourDifference;
+    }
+
+    public Boolean getIsEligibleForTransfer() {
+        return isEligibleForTransfer;
+    }
+
+    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer) {
+        this.isEligibleForTransfer = isEligibleForTransfer;
+    }
+
+    public LocalDateTime getEvaluatedAt() {
+        return evaluatedAt;
+    }
+
+    public void setEvaluatedAt(LocalDateTime evaluatedAt) {
+        this.evaluatedAt = evaluatedAt;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
