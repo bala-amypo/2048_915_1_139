@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface UniversityRepository
         extends JpaRepository<University, Long> {
 
-    // Used for uniqueness validation
+    
     Optional<University> findByName(String name);
 }
