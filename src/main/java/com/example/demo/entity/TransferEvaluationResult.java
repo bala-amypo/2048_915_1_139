@@ -2,42 +2,103 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
+@Table(name = "transfer_evaluation_results")
 public class TransferEvaluationResult {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "source_course_id")
     private Course sourceCourse;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "target_course_id")
     private Course targetCourse;
 
-    private boolean isEligibleForTransfer;
+    private Double overlapPercentage;
+
+    private Integer creditHourDifference;
+
+    @Column(nullable = false)
+    private Boolean isEligibleForTransfer;
+
+    @Column(nullable = false)
+    private Timestamp evaluatedAt;
+
+    @Column(length = 500)
     private String notes;
-    private double overlapPercentage;
-    private int creditHourDifference;
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public TransferEvaluationResult() {
+        this.evaluatedAt = new Timestamp(System.currentTimeMillis());
+    }
 
-    public Course getSourceCourse() { return sourceCourse; }
-    public void setSourceCourse(Course sourceCourse) { this.sourceCourse = sourceCourse; }
+    // getters and setters
+    public Long getId() {
+        return id;
+    }
 
-    public Course getTargetCourse() { return targetCourse; }
-    public void setTargetCourse(Course targetCourse) { this.targetCourse = targetCourse; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public boolean isEligibleForTransfer() { return isEligibleForTransfer; }
-    public void setIsEligibleForTransfer(boolean eligible) { this.isEligibleForTransfer = eligible; }
+    public Course getSourceCourse() {
+        return sourceCourse;
+    }
 
-    public String getNotes() { return notes; }
-    public void setNotes(String notes) { this.notes = notes; }
+    public void setSourceCourse(Course sourceCourse) {
+        this.sourceCourse = sourceCourse;
+    }
 
-    public double getOverlapPercentage() { return overlapPercentage; }
-    public void setOverlapPercentage(double overlapPercentage) { this.overlapPercentage = overlapPercentage; }
+    public Course getTargetCourse() {
+        return targetCourse;
+    }
 
-    public int getCreditHourDifference() { return creditHourDifference; }
-    public void setCreditHourDifference(int creditHourDifference) { this.creditHourDifference = creditHourDifference; }
+    public void setTargetCourse(Course targetCourse) {
+        this.targetCourse = targetCourse;
+    }
+
+    public Double getOverlapPercentage() {
+        return overlapPercentage;
+    }
+
+    public void setOverlapPercentage(Double overlapPercentage) {
+        this.overlapPercentage = overlapPercentage;
+    }
+
+    public Integer getCreditHourDifference() {
+        return creditHourDifference;
+    }
+
+    public void setCreditHourDifference(Integer creditHourDifference) {
+        this.creditHourDifference = creditHourDifference;
+    }
+
+    public Boolean getIsEligibleForTransfer() {
+        return isEligibleForTransfer;
+    }
+
+    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer) {
+        this.isEligibleForTransfer = isEligibleForTransfer;
+    }
+
+    public Timestamp getEvaluatedAt() {
+        return evaluatedAt;
+    }
+
+    public void setEvaluatedAt(Timestamp evaluatedAt) {
+        this.evaluatedAt = evaluatedAt;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }

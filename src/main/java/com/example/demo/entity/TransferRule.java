@@ -3,49 +3,79 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "transfer_rules")
 public class TransferRule {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Course sourceCourse;
-
-    @ManyToOne
-    private Course targetCourse;
-
-    private double minimumOverlapPercentage;
-    private int creditHourTolerance;
-    private boolean active;
-
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "source_university_id")
     private University sourceUniversity;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "target_university_id")
     private University targetUniversity;
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(nullable = false)
+    private Double minimumOverlapPercentage;
 
-    public Course getSourceCourse() { return sourceCourse; }
-    public void setSourceCourse(Course sourceCourse) { this.sourceCourse = sourceCourse; }
+    @Column(nullable = false)
+    private Integer creditHourTolerance;
 
-    public Course getTargetCourse() { return targetCourse; }
-    public void setTargetCourse(Course targetCourse) { this.targetCourse = targetCourse; }
+    @Column(nullable = false)
+    private Boolean active = true;
 
-    public double getMinimumOverlapPercentage() { return minimumOverlapPercentage; }
-    public void setMinimumOverlapPercentage(double minimumOverlapPercentage) { this.minimumOverlapPercentage = minimumOverlapPercentage; }
+    public TransferRule() {
+    }
 
-    public int getCreditHourTolerance() { return creditHourTolerance; }
-    public void setCreditHourTolerance(int creditHourTolerance) { this.creditHourTolerance = creditHourTolerance; }
+    // getters and setters
+    public Long getId() {
+        return id;
+    }
 
-    public boolean getActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public University getSourceUniversity() { return sourceUniversity; }
-    public void setSourceUniversity(University sourceUniversity) { this.sourceUniversity = sourceUniversity; }
+    public University getSourceUniversity() {
+        return sourceUniversity;
+    }
 
-    public University getTargetUniversity() { return targetUniversity; }
-    public void setTargetUniversity(University targetUniversity) { this.targetUniversity = targetUniversity; }
+    public void setSourceUniversity(University sourceUniversity) {
+        this.sourceUniversity = sourceUniversity;
+    }
+
+    public University getTargetUniversity() {
+        return targetUniversity;
+    }
+
+    public void setTargetUniversity(University targetUniversity) {
+        this.targetUniversity = targetUniversity;
+    }
+
+    public Double getMinimumOverlapPercentage() {
+        return minimumOverlapPercentage;
+    }
+
+    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
+        this.minimumOverlapPercentage = minimumOverlapPercentage;
+    }
+
+    public Integer getCreditHourTolerance() {
+        return creditHourTolerance;
+    }
+
+    public void setCreditHourTolerance(Integer creditHourTolerance) {
+        this.creditHourTolerance = creditHourTolerance;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 }
