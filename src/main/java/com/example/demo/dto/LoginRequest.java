@@ -1,8 +1,14 @@
 package com.example.demo.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Login request payload")
 public class LoginRequest {
 
+    @Schema(description = "Username", example = "admin")
     private String username;
+
+    @Schema(description = "Password", example = "admin123")
     private String password;
 
     public LoginRequest() {
