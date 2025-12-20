@@ -5,6 +5,7 @@ import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.AuthService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,13 @@ import java.util.Set;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final JwtTokenProvider tokenProvider;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public AuthServiceImpl(UserRepository userRepository) {
+    public AuthServiceImpl(UserRepository userRepository,
+                           JwtTokenProvider tokenProvider) {
         this.userRepository = userRepository;
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
 
-        return new AuthResponse("DUMMY_TOKEN");
+        return new AuthResponse(tokenProvider.generateToken(user.getEmail()));
     }
 
     @Override
@@ -48,6 +52,6 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Invalid credentials");
         }
 
-        return new AuthResponse("DUMMY_TOKEN");
+        return new AuthResponse(tokenProvider.generateToken(user.getEmail()));
     }
 }
