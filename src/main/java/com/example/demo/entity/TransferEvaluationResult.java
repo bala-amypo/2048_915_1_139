@@ -2,33 +2,42 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
-
 @Entity
 public class TransferEvaluationResult {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long sourceCourseId;
-    private Long targetCourseId;
-    private String result;
+    @ManyToOne
+    private Course sourceCourse;
 
+    @ManyToOne
+    private Course targetCourse;
+
+    private boolean isEligibleForTransfer;
+    private String notes;
+    private double overlapPercentage;
+    private int creditHourDifference;
+
+    // getters & setters
     public Long getId() { return id; }
-    public Long getSourceCourseId() { return sourceCourseId; }
-    public Long getTargetCourseId() { return targetCourseId; }
-    public String getResult() { return result; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setSourceCourseId(Long sourceCourseId) {
-        this.sourceCourseId = sourceCourseId;
-    }
+    public Course getSourceCourse() { return sourceCourse; }
+    public void setSourceCourse(Course sourceCourse) { this.sourceCourse = sourceCourse; }
 
-    public void setTargetCourseId(Long targetCourseId) {
-        this.targetCourseId = targetCourseId;
-    }
+    public Course getTargetCourse() { return targetCourse; }
+    public void setTargetCourse(Course targetCourse) { this.targetCourse = targetCourse; }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
+    public boolean isEligibleForTransfer() { return isEligibleForTransfer; }
+    public void setIsEligibleForTransfer(boolean eligible) { this.isEligibleForTransfer = eligible; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    public double getOverlapPercentage() { return overlapPercentage; }
+    public void setOverlapPercentage(double overlapPercentage) { this.overlapPercentage = overlapPercentage; }
+
+    public int getCreditHourDifference() { return creditHourDifference; }
+    public void setCreditHourDifference(int creditHourDifference) { this.creditHourDifference = creditHourDifference; }
 }
