@@ -3,21 +3,56 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "course_content_topics")
 public class CourseContentTopic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long courseId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-    private String title;
+    @Column(nullable = false)
+    private String topicName;
 
-    public Long getId() { return id; }
-    public Long getCourseId() { return courseId; }
-    public String getTitle() { return title; }
+    @Column(nullable = false)
+    private Double weightPercentage;
 
-    public void setId(Long id) { this.id = id; }
-    public void setCourseId(Long courseId) { this.courseId = courseId; }
-    public void setTitle(String title) { this.title = title; }
+    public CourseContentTopic() {
+    }
+
+    // getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+
+    public Double getWeightPercentage() {
+        return weightPercentage;
+    }
+
+    public void setWeightPercentage(Double weightPercentage) {
+        this.weightPercentage = weightPercentage;
+    }
 }
