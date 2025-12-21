@@ -1,28 +1,12 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
 import com.example.demo.entity.CourseContentTopic;
-import com.example.demo.repository.CourseContentTopicRepository;
-import com.example.demo.service.CourseContentTopicService;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class CourseContentTopicServiceImpl implements CourseContentTopicService {
+public interface CourseContentTopicService {
 
-    private final CourseContentTopicRepository repository;
+    CourseContentTopic createTopic(CourseContentTopic topic);
 
-    public CourseContentTopicServiceImpl(CourseContentTopicRepository repository) {
-        this.repository = repository;
-    }
-
-    @Override
-    public CourseContentTopic saveTopic(CourseContentTopic topic) {
-        return repository.save(topic);
-    }
-
-    @Override
-    public List<CourseContentTopic> getTopicsByCourse(Long courseId) {
-        return repository.findByCourseId(courseId);
-    }
+    List<CourseContentTopic> getTopicsByCourseId(Long courseId);
 }
