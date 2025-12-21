@@ -23,7 +23,7 @@ public class CourseContentTopic {
     public CourseContentTopic() {
     }
 
-    // getters and setters
+    
     public Long getId() {
         return id;
     }

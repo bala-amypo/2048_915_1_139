@@ -26,7 +26,7 @@ public class University {
     public University() {
     }
 
-    // getters and setters
+   
     public Long getId() {
         return id;
     }
