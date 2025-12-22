@@ -16,13 +16,13 @@ public class UniversityController {
     @Autowired
     private UniversityService universityService;
 
-    // CREATE
+    
     @PostMapping
     public University createUniversity(@RequestBody University university) {
         return universityService.saveUniversity(university);
     }
 
-    // UPDATE
+   
     @PutMapping("/{id}")
     public University updateUniversity(
             @PathVariable Long id,
@@ -31,19 +31,19 @@ public class UniversityController {
         return universityService.saveUniversity(university);
     }
 
-    // GET BY ID
+    
     @GetMapping("/{id}")
     public University getUniversity(@PathVariable Long id) {
         return universityService.getUniversityById(id);
     }
 
-    // GET ALL
+   
     @GetMapping
     public List<University> getAllUniversities() {
         return universityService.getAllUniversities();
     }
 
-    // SOFT DELETE (DEACTIVATE)
+    
     @PutMapping("/{id}/deactivate")
     public String deactivate(@PathVariable Long id) {
         University uni = universityService.getUniversityById(id);
