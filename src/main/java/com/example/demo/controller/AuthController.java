@@ -1,23 +1,27 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthResponse;
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.RegisterRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Tag(name = "Auth")
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return "registered";
+   
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(
+            @RequestBody Map<String, String> request) {
+        return ResponseEntity.ok(Map.of("message", "Login successful"));
     }
 
-    @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
-        return new AuthResponse("dummy-jwt-token");
+    
+    @PostMapping("/register")
+    public ResponseEntity<Map<String, String>> register(
+            @RequestBody Map<String, String> request) {
+        return ResponseEntity.ok(Map.of("message", "Registration successful"));
     }
 }
