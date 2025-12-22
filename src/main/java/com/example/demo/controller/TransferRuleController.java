@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Tag(name = "Transfer Rules")
 @RestController
@@ -9,29 +12,26 @@ import org.springframework.web.bind.annotation.*;
 public class TransferRuleController {
 
     @PostMapping
-    public String createRule() {
-        return "created";
+    public ResponseEntity<Map<String, Object>> createRule(@RequestBody Map<String, Object> rule) {
+        return ResponseEntity.ok(rule);
     }
 
     @PutMapping("/{id}")
-    public String updateRule(@PathVariable Long id) {
-        return "updated";
+    public ResponseEntity<Map<String, Object>> updateRule(
+            @PathVariable Long id,
+            @RequestBody Map<String, Object> rule) {
+
+        rule.put("id", id);
+        return ResponseEntity.ok(rule);
     }
 
     @GetMapping("/{id}")
-    public String getRule(@PathVariable Long id) {
-        return "rule";
+    public ResponseEntity<Map<String, Object>> getRule(@PathVariable Long id) {
+        return ResponseEntity.ok(Map.of("id", id, "message", "Transfer rule details"));
     }
 
-    @GetMapping("/pair/{sourceId}/{targetId}")
-    public String getRules(
-            @PathVariable Long sourceId,
-            @PathVariable Long targetId) {
-        return "rules";
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public String deactivate(@PathVariable Long id) {
-        return "deactivated";
+    @GetMapping
+    public ResponseEntity<Map<String, Object>> getAllRules() {
+        return ResponseEntity.ok(Map.of("message", "All transfer rules list"));
     }
 }
