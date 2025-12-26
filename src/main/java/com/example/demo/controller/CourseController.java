@@ -28,13 +28,13 @@ public class CourseController {
         return courseService.updateCourse(id, course);
     }
     
-    @DeleteMapping("/{id}")
-    public void deactivate(@PathVariable Long id) {
-        courseService.deactivateCourse(id);
-    }
-    
     @GetMapping("/university/{universityId}")
     public List<Course> getByUniversity(@PathVariable Long universityId) {
         return courseService.getCoursesByUniversity(universityId);
+    }
+    
+    @PutMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable Long id) {
+        courseService.deactivateCourse(id);
     }
 }
